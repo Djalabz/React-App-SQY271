@@ -29,7 +29,6 @@ function Blog() {
                     </div>
                 ))
             : <h2>Les articles sont cachés !</h2> }
-
         </>
     )
 }
