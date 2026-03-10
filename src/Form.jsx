@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import Input from "./Input.jsx"
 
+
+// Ajouter un bouton qui permette de sélectionner entre Signup et Login 
+// Selon cette sélection afficher les bons inputs 
 
 function Form() {
     const [inputValue, setInputValue] = useState({
@@ -13,46 +17,33 @@ function Form() {
         setInputValue({ ...inputValue, [event.target.name] : event.target.value })
     } 
 
-
     return ( 
         <>
-    
             <h2>Formulaire de Signup</h2>
 
-            <input 
-                type="email" 
+            <Input 
+                type="text" 
                 name="email" 
-                placeholder='Ici votre email' 
-                value={inputValue.email}
-                onChange={(e) => updateInputs(e)}
-                required
+                onChange={updateInputs} 
+                inputValue={inputValue} 
             />
-
-            <input 
+            <Input 
                 type="text" 
                 name="username" 
-                placeholder='Ici votre username' 
-                value={inputValue.username}
-                onChange={(e) => updateInputs(e)}
-                required
+                onChange={updateInputs} 
+                inputValue={inputValue} 
             />
-
-            <input 
+            <Input 
                 type="password" 
                 name="password" 
-                placeholder='Ici votre password' 
-                value={inputValue.password}
-                onChange={(e) => updateInputs(e)}
-                required
+                onChange={updateInputs} 
+                inputValue={inputValue} 
             />
-
-            <input 
-                type="confirm-password" 
+            <Input 
+                type="password" 
                 name="confirm" 
-                placeholder='Ici confirmer votre password' 
-                value={inputValue.confirm}
-                onChange={(e) => updateInputs(e)}
-                required
+                onChange={updateInputs} 
+                inputValue={inputValue} 
             />
 
             <button>Signup</button>
