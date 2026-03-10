@@ -1,6 +1,7 @@
 import Title from "./Title.jsx"
 import Home from "./Home.jsx"
 import Counter from "./Counter.jsx"
+import Blog from "./Blog.jsx"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 // Ceci est un composant fonctionnel en Reat
@@ -17,12 +18,14 @@ function App() {
         <nav>
           <Link to="/">Home</Link> |{" "}
           <Link to="/counter">Counter</Link> |{" "}
+          <Link to="/blog">Blog</Link> |{" "}
         </nav>
 
         {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/counter" element={<Counter />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </BrowserRouter>
 
