@@ -13,6 +13,7 @@ function Form() {
         confirm: ""
     })
 
+    const [isLogin, setIsLogin] = useState(false)
 
     const updateInputs = (event) =>  {
         setInputValue({ ...inputValue, [event.target.name] : event.target.value })
@@ -20,34 +21,64 @@ function Form() {
 
     return ( 
         <>
-            <h2>Formulaire de Signup</h2>
 
-            <Input 
-                type="text" 
-                name="email" 
-                onChange={updateInputs} 
-                inputValue={inputValue} 
-            />
-            <Input 
-                type="text" 
-                name="username" 
-                onChange={updateInputs} 
-                inputValue={inputValue} 
-            />
-            <Input 
-                type="password" 
-                name="password" 
-                onChange={updateInputs} 
-                inputValue={inputValue} 
-            />
-            <Input 
-                type="password" 
-                name="confirm" 
-                onChange={updateInputs} 
-                inputValue={inputValue} 
-            />
+            <button onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Signup" : "Login"}</button>
 
-            <button>Signup</button>
+            { isLogin ?
+
+                <>
+                    <h2>Formulaire de Login</h2>
+
+                    <Input 
+                        type="text" 
+                        name="username" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+                    <Input 
+                        type="password" 
+                        name="password" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+
+                    <button>Login</button>
+
+                </>         
+
+            :
+            
+                <>
+                    <h2>Formulaire de Signup</h2>
+
+                    <Input 
+                        type="text" 
+                        name="email" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+                    <Input 
+                        type="text" 
+                        name="username" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+                    <Input 
+                        type="password" 
+                        name="password" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+                    <Input 
+                        type="password" 
+                        name="confirm" 
+                        onChange={updateInputs} 
+                        inputValue={inputValue} 
+                    />
+
+                    <button>Signup</button>
+                </>
+            }
 
         </>
     )
