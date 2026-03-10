@@ -4,7 +4,7 @@ function Input({ type, name, inputValue, onChange }) {
             type={type} 
             name={name} 
             placeholder={"Ici votre " + name} 
-            value={inputValue.email}
+            value={inputValue[name]}
             onChange={onChange}
             required
         />

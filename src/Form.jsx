@@ -13,7 +13,8 @@ function Form() {
         confirm: ""
     })
 
-    function updateInputs(event) {
+
+    const updateInputs = (event) =>  {
         setInputValue({ ...inputValue, [event.target.name] : event.target.value })
     } 
 
