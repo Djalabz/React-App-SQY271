@@ -22,8 +22,8 @@ function Title({ name, age }) {
 
             {/* Avec .map on parcourt les tableaux dans le JSX */}
             {/* !! Chaque élément de liste generé doit avoir une clé unique (key) */}
-            { array.map(elem => 
-                (<h2 key={elem.id}>{elem.content}</h2>)
+            { array.map((elem, index) => 
+                (<h2 key={index}>{elem.content}</h2>)
             )}
 
         </>
