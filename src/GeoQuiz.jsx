@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-// API pour les données GEO : https://restcountries.com/v3.1/all?fields=name,capital,currencies
+// API pour les données GEO : https://restcountries.com/v3.1/all?fields=name, flags
 
 // 1 - Afficher un drapeau aléatoire depuis l'API 
 // 2 - Afficher en dessous 4 boutons représentant chacun un pays dont un seul est la bonne réponse
@@ -8,7 +8,12 @@ import { useState, useEffect } from "react"
 
 // Autre possibilité : afficher un input sous le drapeau du pays et le user doit taper la bonne réponse 
 
+let url = "https://restcountries.com/v3.1/all?fields=name,flags"
+
 function GeoQuiz() {
+    const [country, setCountry] = useState("")
+    const [countries, setCountries] = useState([])
+
     // STATES
     // Nos différents states : le pays choisi aléatoirement à l'aide de l'API, le score, 
     // les différentes options/réponses, les tours etc
@@ -22,8 +27,23 @@ function GeoQuiz() {
     // A chaque tour on corrige en affichant, si besoin la bonnee réponse 
     // On pourra utiliser setTimeout pour adfficher qqes secondes la correction et passer à la question suivante 
 
+    useEffect(() => {
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+
+            setCountries(data)
+
+            let country = data[Math.round(Math.random() * data.length)] 
+            setCountry(country)
+        })
+        .catch(err => console.log(err))
+    }, [])
+
     return ( 
         <>
+            {country && <img src={country.flags.svg} alt={country.flags.alt} />}
+
         </>
      )
 }
