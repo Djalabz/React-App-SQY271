@@ -4,7 +4,6 @@ import Input from "./Input.jsx"
 
 // Ajouter un bouton qui permette de sélectionner entre Signup et Login 
 // Selon cette sélection afficher les bons inputs 
-
 function Form() {
     const [inputValue, setInputValue] = useState({
         email: "",
@@ -19,9 +18,9 @@ function Form() {
         setInputValue({ ...inputValue, [event.target.name] : event.target.value })
     } 
 
+
     return ( 
         <>
-
             <button onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Signup" : "Login"}</button>
 
             { isLogin ?
