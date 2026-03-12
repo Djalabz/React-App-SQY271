@@ -3,9 +3,11 @@ import Home from "./Home.jsx"
 import Counter from "./Counter.jsx"
 import Blog from "./Blog.jsx"
 import Form from "./Form.jsx"
+import Quiz from "./Quiz.jsx"
+import Shop from "./Shop.jsx"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-// Ceci est un composant fonctionnel en Reat
+// Ceci est un composant fonctionnel en React
 function App() {
   // 1 - Données (state, variables etc)
 
@@ -21,6 +23,8 @@ function App() {
           <Link to="/counter">Counter</Link> |{" "}
           <Link to="/blog">Blog</Link> |{" "}
           <Link to="/form">Form</Link> |{" "}
+          <Link to="/quiz">Quiz</Link> |{" "}
+          <Link to="/shop">Shop</Link> |{" "}
         </nav>
 
         {/* Routes */}
@@ -29,6 +33,8 @@ function App() {
           <Route path="/counter" element={<Counter />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/form" element={<Form />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
       </BrowserRouter>
 

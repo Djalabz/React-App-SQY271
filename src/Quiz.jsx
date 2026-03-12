@@ -1,11 +1,11 @@
 import questions from './data/questions-culture-generale.json'
+import { useState } from "react"
 
-console.log(questions)
 
 // QUIZ EN REACT JS 
 
 // 1 - On doit lors de chaque tour pouvoir choisir une réponse parmi celles proposées 
-// 2 - Une fois la réponse choisie on passe à la question suivante après avoir afrfiché la correction
+// 2 - Une fois la réponse choisie on passe à la question suivante après avoir affiché la correction
 // 3 - On ne veut faire que 5 tours donc après la 5eme question on affiche que le jeu est terminé et on propose de recommencer
 // 4 - On doit aussi gérer le score pour chaque tour
 
@@ -24,15 +24,44 @@ console.log(questions)
 
 function Quiz() {
     // Gestion des différents states / états liés au quiz 
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [score, setScore] = useState(0)
+   
+    function handleClick(choice) {
+        // Vérification de la réponse
+        if (choice.correcte) {
+            alert("Bonne réponse !")
+            setScore(score + 1)
+        } else {
+            alert("Mauvaise réponse...")
+        }
 
-
-
-    // Les différentes opérations - à savoir les fonctions
-
+        setCurrentIndex(currentIndex + 1)
+    }
 
     return ( 
         <>
-            {/* Le JSX pour le Quiz */}
+            { currentIndex < 5 ? 
+            
+                <>
+                    <h2>Question {currentIndex + 1}</h2>
+                    <h3>Score : {score} / 5</h3>
+
+                    <h1>{questions[currentIndex].intitule}</h1>
+
+                    {questions[currentIndex].choix.map((choice, index) => (
+                        <button key={index} onClick={() => handleClick(choice)}>{choice.texte}</button>
+                    ))}
+                </>
+
+                :
+
+                <>
+                    <h2>Votre score est de {score} /5</h2>
+                    <button onClick={() => setCurrentIndex(0)}>Recommencer</button>
+                </>
+    
+            }
         </>
      )
 }
