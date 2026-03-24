@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import './GeoQuiz.css'
 
 // API pour les données GEO : https://restcountries.com/v3.1/all?fields=name, flags
 
@@ -12,7 +13,7 @@ let url = "https://restcountries.com/v3.1/all?fields=name,flags"
 
 function GeoQuiz() {
     const [country, setCountry] = useState("")
-    const [countries, setCountries] = useState([])
+    // const [countries, setCountries] = useState([])
     const [options, setOptions] = useState([])
     const [round, setRound] = useState(1)
     const [score, setScore] = useState(0)
@@ -35,7 +36,7 @@ function GeoQuiz() {
         .then(res => res.json())
         .then(data => {
             // On enregistre l'ensemble des pays dans un state countries
-            setCountries(data)
+            // setCountries(data)
 
             // On recup notre drapeau aléatoire et on ajoute le pays en question au state country
             let randomCountry = data[Math.round(Math.random() * data.length)] 
@@ -47,6 +48,7 @@ function GeoQuiz() {
         })
         .catch(err => console.log(err))
     }, [round]) // Ici le tableau ede dcépendance contient round -> dès que le state round change l'effet est déclenché
+
 
     function fetchOptions(data, randomCountry) {
         // On initialise le tableau d'options avec pour commencer la bonne réponse
@@ -101,12 +103,11 @@ function GeoQuiz() {
 
     return ( 
         <>
-            
             { round < 5 ? 
                 <>
                     <h3>Score : {score} / 5</h3>
 
-                    {country && <img src={country.flags.svg} alt={country.flags.alt} />}
+                    {country && <img className="flag" src={country.flags.svg} alt={country.flags.alt} />}
 
                     {options && options.map((option, index) => (
                         <button key={index} onClick={() => handleClick(option)}>{option.name.common}</button>
@@ -116,14 +117,11 @@ function GeoQuiz() {
                 :
 
                 <>
-                
                     <h2>Fin de partie !</h2>
                     <h3>Score : {score} / 5</h3>
 
                     <button onClick={() => handleReset()}>Recommencer</button>
-                
-                </>
-                
+                </>  
             }
         </>
      )

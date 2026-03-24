@@ -1,7 +1,6 @@
 import questions from './data/questions-culture-generale.json'
 import { useState } from "react"
 
-
 // QUIZ EN REACT JS 
 
 // 1 - On doit lors de chaque tour pouvoir choisir une réponse parmi celles proposées 
@@ -67,3 +66,5 @@ function Quiz() {
 }
 
 export default Quiz
+
+
