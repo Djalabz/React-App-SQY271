@@ -7,6 +7,7 @@ import Quiz from "./Quiz.jsx"
 import Shop from "./Shop.jsx"
 import GeoQuiz from "./GeoQuiz.jsx"
 import Random from "./Random.jsx"
+import Todo from "./Todo.jsx"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 // Ceci est un composant fonctionnel en React
@@ -29,6 +30,7 @@ function App() {
           <Link to="/shop">Shop</Link> |{" "}
           <Link to="/geoquiz">Geoquiz</Link> |{" "}
           <Link to="/random">Random</Link> |{" "}
+          <Link to="/todo">Todo</Link> |{" "}
         </nav>
 
         {/* Routes */}
@@ -41,6 +43,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/geoquiz" element={<GeoQuiz />} />
           <Route path="/random" element={<Random/>} />
+          <Route path="/todo" element={<Todo/>} />
         </Routes>
       </BrowserRouter>
 
