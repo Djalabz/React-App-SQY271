@@ -6,6 +6,12 @@ import Input from "./Input.jsx"
 // Faire une req simple en POST -> lorsque l'on clique sur Login on doit envoyer email et mdp vers l'API (utiliser fetch ou axios)
 // Afficher ces infos dans la console (ou autre) de l'API mais aussi renvoyer vers react un message de confirmation
 
+// METTRE EN PLACE LE SIGNUNP POUR REACT ET NODE 
+// 1 - Depuis le form de React envoyer les infos nécessaires au signup 
+// 2 - Bien vérifier ces infos au préalable (notamment les mdp et leur contenu)
+// 3 - Comme pour le login attester de la bonne réception des infos coté API et 
+// envoyer une réponse de type success au front
+
 
 // Ajouter un bouton qui permette de sélectionner entre Signup et Login 
 // Selon cette sélection afficher les bons inputs 
@@ -23,9 +29,25 @@ function Form() {
         setInputValue({ ...inputValue, [event.target.name] : event.target.value })
     } 
 
-    async function handleLogin() {
+    async function handleSubmit(route) {
+        // Vérification des données : leur forme, les 2 mdp etc
+        // On pourra utiliser les ... Expressions régulières aka les REGEX
+        // let emailRegex = new Regexp("[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]")
+        // let passwordRegex = new Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{12,}$")
 
-        const res = await fetch('http://localhost:3000/login', {
+        // if (!emailRegex.test(inputValue.email)) {
+        //     console.log("error : format email invalide")
+        // }
+
+        // Vérifier que les mdp correspondent bien 
+        // if (inputValue.password != inputValue.confirm) {
+        //     console.log("error : les mdp ne sont pas les memes")
+        // }
+
+        console.log("in function")
+
+
+        const res = await fetch('http://localhost:3000/' + route, {
             method: 'POST',
             body: JSON.stringify(inputValue),
             headers: {
@@ -38,6 +60,8 @@ function Form() {
 
         console.log(data)
     }
+
+    
 
     return ( 
         <>
@@ -61,7 +85,7 @@ function Form() {
                         inputValue={inputValue} 
                     />
 
-                    <button onClick={() => handleLogin()}>Login</button>
+                    <button onClick={() => handleSubmit("login")}>Login</button>
 
                 </>         
 
@@ -95,7 +119,7 @@ function Form() {
                         inputValue={inputValue} 
                     />
 
-                    <button>Signup</button>
+                    <button onClick={() => handleSubmit("signup")}>Signup</button>
                 </>
             }
 
