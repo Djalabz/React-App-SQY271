@@ -1,9 +1,10 @@
 // La TODO en React 
 
-// Ici vous devrez créer l'UI de la todo 
-// On doit pouvoir ajouter une todo, modifier une todo, supprimer une todo 
-// Cela doit etre visible à la fois coté front (React) mais aussi se traduire par les
-// changements adequats en BDD -> Il va falloir adapter l'API 
+// 1 - Pouvoir supprimer une Todo -> En BDD mais aussui coté front visuellement
+// 2 - Bonne idée : un message de confirmation avant suppression
+// 3 - Il va donc falloir modifier React mais aussi notre API 
+
+
 import { useState, useEffect } from "react"
 
 
@@ -52,6 +53,20 @@ function Todo() {
         .catch(err => console.log(err))
     }
 
+    async function deleteTodo(id) {
+        return fetch("http://localhost:3000/todo/delete", {
+            method: "DELETE",
+            body: JSON.stringify({ id }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept' : 'application/json'
+            }
+        })
+        .then((res) => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+    }
+
     // handleChange vient modifier le state de la todo en cours liée à la valeur de l'input
     function handleChange(e) {
         setInputValue({ ...inputValue, content: e.target.value })
@@ -66,6 +81,12 @@ function Todo() {
             .then(() => setTodos([ ...todos, inputValue]))
             .catch(err => console.log(err))
         }
+    }
+
+    function handleDeleteTodo(id) {
+        deleteTodo(id)
+        .then(() => setTodos(todos.filter(todo => todo.id != id)))
+        .catch(err => console.log(err))
     }
 
     return ( 
@@ -86,6 +107,7 @@ function Todo() {
                 <div key={index} className="todo">
                     <p>{todo.content}</p>
                     <input type="checkbox" />
+                    <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
                 </div>
             ))}
 
