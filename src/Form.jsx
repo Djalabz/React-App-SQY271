@@ -1,16 +1,13 @@
 import { useState } from 'react'
 import Input from "./Input.jsx"
 
-// PREMIER EXO REACT -> API NODE (à faire à la fois coté React et coté Node)
-// Faire fonctionner notre app React avec notre nouvelle API express
-// Faire une req simple en POST -> lorsque l'on clique sur Login on doit envoyer email et mdp vers l'API (utiliser fetch ou axios)
-// Afficher ces infos dans la console (ou autre) de l'API mais aussi renvoyer vers react un message de confirmation
+// Faire fonctionner le Login et Signup : 
 
-// METTRE EN PLACE LE SIGNUNP POUR REACT ET NODE 
-// 1 - Depuis le form de React envoyer les infos nécessaires au signup 
-// 2 - Bien vérifier ces infos au préalable (notamment les mdp et leur contenu)
-// 3 - Comme pour le login attester de la bonne réception des infos coté API et 
-// envoyer une réponse de type success au front
+// 1 - Quand on arrive sur notre app React on tombe directement sur le form signup/login  
+// 2 - Empecher l'accès aux autres pages tant que le user n'est pas login (rendu conditionnel)
+// 3 - Il faudra faire les mofis au niveau de la route login coté API 
+// 4 - On se contentera pour le moment de renvoyer un message de confirmation vers le front 
+
 
 
 // Ajouter un bouton qui permette de sélectionner entre Signup et Login 
@@ -44,12 +41,11 @@ function Form() {
         //     console.log("error : les mdp ne sont pas les memes")
         // }
 
-        console.log("in function")
 
-
-        const res = await fetch('http://localhost:3000/' + route, {
+        const res = await fetch('http://localhost:3000/user/' + route, {
             method: 'POST',
             body: JSON.stringify(inputValue),
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept' : 'application/json'
@@ -74,7 +70,7 @@ function Form() {
 
                     <Input 
                         type="text" 
-                        name="username" 
+                        name="email" 
                         onChange={updateInputs} 
                         inputValue={inputValue} 
                     />
