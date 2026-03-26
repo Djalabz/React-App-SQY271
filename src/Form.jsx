@@ -38,7 +38,7 @@ function Form() {
         // if (!emailRegex.test(inputValue.email)) {
         //     console.log("error : format email invalide")
         // }
-
+ 
         // Vérifier que les mdp correspondent bien 
         // if (inputValue.password != inputValue.confirm) {
         //     console.log("error : les mdp ne sont pas les memes")
