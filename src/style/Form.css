@@ -1,0 +1,4 @@
+.login-container, .signup-container {
+    display: grid;
+    row-gap: 1rem;
+} 

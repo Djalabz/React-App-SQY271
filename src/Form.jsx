@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import Input from "./Input.jsx"
+import Button from "@mui/material/Button"
+import ToggleButton from "@mui/material/ToggleButton"
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup"
 
 
+import "./style/Form.css"
 // Faire fonctionner le Login et Signup : 
 
 // 1 - Quand on arrive sur notre app React on tombe directement sur le form signup/login  
@@ -61,28 +65,43 @@ function Form() {
 
     return ( 
         <>
-            <button onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Signup" : "Login"}</button>
+            {/* <button onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Signup" : "Login"}</button> */}
+            <ToggleButtonGroup
+                color="primary"
+                value={isLogin}
+                exclusive
+                onChange={() => setIsLogin(!isLogin)}
+                aria-label="Platform"
+            >
+
+                <ToggleButton value="false">Login</ToggleButton>
+                <ToggleButton value="true">Signup</ToggleButton>
+
+            </ToggleButtonGroup>
 
             { isLogin ?
 
                 <>
                     <h2>Formulaire de Login</h2>
+                    
+                    <div className="login-container">
+                        <Input 
+                            type="text" 
+                            name="email" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
 
-                    <Input 
-                        type="text" 
-                        name="email" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
+                        <Input 
+                            type="password" 
+                            name="password" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
 
-                    <Input 
-                        type="password" 
-                        name="password" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
-
-                    <button onClick={() => handleSubmit("login")}>Login</button>
+                        {/* <button onClick={() => handleSubmit("login")}>Login</button> */}
+                        <Button  onClick={() => handleSubmit("login")} variant="contained">Login</Button>
+                    </div>
 
                 </>         
 
@@ -91,32 +110,35 @@ function Form() {
                 <>
                     <h2>Formulaire de Signup</h2>
 
-                    <Input 
-                        type="text" 
-                        name="email" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
-                    <Input 
-                        type="text" 
-                        name="username" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
-                    <Input 
-                        type="password" 
-                        name="password" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
-                    <Input 
-                        type="password" 
-                        name="confirm" 
-                        onChange={updateInputs} 
-                        inputValue={inputValue} 
-                    />
+                    <div className="signup-container">
+                        <Input 
+                            type="text" 
+                            name="email" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
+                        <Input 
+                            type="text" 
+                            name="username" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
+                        <Input 
+                            type="password" 
+                            name="password" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
+                        <Input 
+                            type="password" 
+                            name="confirm" 
+                            onChange={updateInputs} 
+                            inputValue={inputValue} 
+                        />
 
-                    <button onClick={() => handleSubmit("signup")}>Signup</button>
+                        {/* <button onClick={() => handleSubmit("signup")}>Signup</button> */}
+                        <Button  onClick={() => handleSubmit("signup")} variant="contained">Signup</Button>
+                    </div>
                 </>
             }
 
