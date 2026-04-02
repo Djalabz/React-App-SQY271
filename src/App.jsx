@@ -27,6 +27,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+import fouine from "./assets/fouine-noBg.png"
+
 import "./style/App.css"
 
 import { useState } from "react"
@@ -83,7 +85,7 @@ function App() {
 
         <Box className="appBar-box" sx={{ flexGrow: 1 }}>
           <AppBar position="static" >
-            <Toolbar sx={{ width : 1024, maxWidth : 1280, margin: "auto",  }}>
+            <Toolbar sx={{ width : 1024, maxWidth : 1280, margin: "auto", display:"flex", justifyContent: "space-between" }}>
               <IconButton
                   size="large"
                   edge="start"
@@ -93,6 +95,9 @@ function App() {
               >
                   <MenuIcon onClick={() => setOpenDrawer(!openDrawer)} />
               </IconButton>
+
+              <img className="logo" src={fouine} alt="fouiny baby" />
+
             </Toolbar>
           </AppBar>
         </Box>

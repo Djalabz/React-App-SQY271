@@ -64,7 +64,8 @@ function Form() {
     
 
     return ( 
-        <>
+        
+        <div className="wrapper">
             {/* <button onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Signup" : "Login"}</button> */}
             <ToggleButtonGroup
                 color="primary"
@@ -78,6 +79,8 @@ function Form() {
                 <ToggleButton value="true">Signup</ToggleButton>
 
             </ToggleButtonGroup>
+
+            <form>
 
             { isLogin ?
 
@@ -142,7 +145,9 @@ function Form() {
                 </>
             }
 
-        </>
+            </form>
+    
+        </div>
     )
 }
 
