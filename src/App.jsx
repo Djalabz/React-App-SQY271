@@ -32,7 +32,7 @@ import fouine from "./assets/fouine-noBg.png"
 import "./style/App.css"
 
 import { useState } from "react"
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
 //// TODO : 
 
@@ -40,15 +40,35 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 // Faire de meme pour la Navbar, faire le plus propre possible 
 // BONUS : Quand on lance l'app la homepage doit etre le login avec possibilité de basculer sur le signup
 
-
-
 // Ceci est un composant fonctionnel en React
 function App() {
   // 1 - Données (state, variables etc)
   const [openDrawer, setOpenDrawer] = useState(false) 
 
-  const DrawerList = (
+  let navigate = useNavigate()
 
+  // Fonction de déconnexion 
+  async function handleLogout() {
+    // Requete http vers API -> /logout -> Coté API on supprime le JWT et on envoit une réponse
+    fetch("http://localhost:3000/user/logout", {
+      method: "GET",
+      credentials : "include",
+      headers : {
+          "Accept" : "application/json", 
+          "Content-Type" : "application/json"
+        }
+    })
+    .then(res => {
+        console.log(res)
+        if (res.status === 200) {
+            navigate("/")
+        }
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={() => setOpenDrawer(false)}>
 
       <List>
@@ -65,13 +85,20 @@ function App() {
       <Divider />
 
       <List>
-        {['Profile', 'Preferences', 'Logout'].map((text, index) => (
+        {['Profile', 'Preferences'].map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
+
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary="Logout" onClick={() => handleLogout()}/>
+          </ListItemButton>
+        </ListItem>
+
       </List>
     </Box>
   )
@@ -81,8 +108,6 @@ function App() {
   // 3 - La vue, cad le JSX qui s'affichera sur notre page
   return (
     <>
-
-
         <Box className="appBar-box" sx={{ flexGrow: 1 }}>
           <AppBar position="static" >
             <Toolbar sx={{ width : 1024, maxWidth : 1280, margin: "auto", display:"flex", justifyContent: "space-between" }}>
@@ -101,30 +126,14 @@ function App() {
             </Toolbar>
           </AppBar>
         </Box>
+
       
-
-
-      <BrowserRouter>
         {/* Navigation */}
-
         <div>
           <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
              {DrawerList} 
           </Drawer>
         </div>
-
-
-        {/* <nav>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/counter">Counter</Link> |{" "}
-          <Link to="/blog">Blog</Link> |{" "}
-          <Link to="/form">Form</Link> |{" "}
-          <Link to="/quiz">Quiz</Link> |{" "}
-          <Link to="/shop">Shop</Link> |{" "}
-          <Link to="/geoquiz">Geoquiz</Link> |{" "}
-          <Link to="/random">Random</Link> |{" "}
-          <Link to="/todo">Todo</Link> |{" "}
-        </nav> */}
 
         {/* Routes */}
         <Routes>
@@ -138,8 +147,6 @@ function App() {
           <Route path="/random" element={<Random/>} />
           <Route path="/todo" element={<Todo/>} />
         </Routes>
-      </BrowserRouter>
-
     </>
   )
 }
