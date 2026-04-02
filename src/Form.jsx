@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Input from "./Input.jsx"
 
+
 // Faire fonctionner le Login et Signup : 
 
 // 1 - Quand on arrive sur notre app React on tombe directement sur le form signup/login  
@@ -41,7 +42,6 @@ function Form() {
         //     console.log("error : les mdp ne sont pas les memes")
         // }
 
-
         const res = await fetch('http://localhost:3000/user/' + route, {
             method: 'POST',
             body: JSON.stringify(inputValue),
@@ -74,6 +74,7 @@ function Form() {
                         onChange={updateInputs} 
                         inputValue={inputValue} 
                     />
+
                     <Input 
                         type="password" 
                         name="password" 
