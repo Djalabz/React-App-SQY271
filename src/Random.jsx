@@ -46,7 +46,8 @@ function Random() {
 
             { student && 
             <>
-                <img className="studentPic" src={"../public/" + student.toLowerCase() + ".jpg"} height="200px" width="200px" />
+                {/* <img className="studentPic" src={"../public/" + student.toLowerCase() + ".jpg"} height="200px" width="200px" /> */}
+                <img className="studentPic" src={student.toLowerCase() + ".jpg"} height="200px" width="200px" />
                 <h2>{student}</h2>
             </>}
 

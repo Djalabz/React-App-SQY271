@@ -78,7 +78,7 @@ function Todo() {
         if (inputValue.content != "") {
             // On appelle addTodo et on attend le résultat de cette opération avant de passer à l'opération suivante
             addTodo()
-            .then(() => setTodos([ ...todos, inputValue]))
+            .then(() => setTodos([ ... todos, inputValue]))
             .catch(err => console.log(err))
         }
     }

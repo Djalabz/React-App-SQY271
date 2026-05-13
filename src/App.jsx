@@ -103,7 +103,8 @@ function App() {
     </Box>
   )
 
-  // 2 - Opérations (en gros les fonctions) 
+  // 2 - Opérations (en gros les fonctions)
+  
 
   // 3 - La vue, cad le JSX qui s'affichera sur notre page
   return (
@@ -134,6 +135,7 @@ function App() {
              {DrawerList} 
           </Drawer>
         </div>
+
 
         {/* Routes */}
         <Routes>
